@@ -80,18 +80,33 @@ def test_wait_for_user_login(page: Page) -> None:
         if no_question_button.is_visible():
             next_page_button.click()
             print("[INFO] No question on this slide. Clicked 'Trang sau'.")
+            page.wait_for_load_state("domcontentloaded")
             page.wait_for_timeout(200)
             continue
 
         if not question_locator.is_visible():
+            answer_button.wait_for(state="visible")
             answer_button.click()
-            question_locator.wait_for(state="visible")
+
+        try:
+            question_locator.wait_for(state="visible", timeout=10000)
+        except Exception:
+            print("[WARN] Question not visible yet. Retrying loop.")
+            page.wait_for_timeout(200)
+            continue
 
         question_text = question_locator.inner_text().strip()
         print(f"[INFO] Question: {question_text}")
 
         answer_texts = question_answer_cache.get(question_text)
         if answer_texts is None:
+            try:
+                answers_locator.first.wait_for(state="visible", timeout=10000)
+            except Exception:
+                print("[WARN] Answers not visible yet. Retrying loop.")
+                page.wait_for_timeout(200)
+                continue
+
             answer_texts = extract_answer_texts(answers_locator)
             question_answer_cache[question_text] = answer_texts
 
