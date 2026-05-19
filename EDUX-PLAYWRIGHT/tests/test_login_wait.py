@@ -128,24 +128,36 @@ def test_wait_for_user_login(page: Page) -> None:
             check_button.click()
             print("[INFO] Clicked 'Kiem tra' button.")
 
-            for _ in range(40):
+            try:
+                page.wait_for_function(
+                    """
+                    () => {
+                      const labels = ['Trang sau', 'Câu tiếp theo', 'Thử lại'];
+                      return labels.some(label => {
+                        const btn = Array.from(document.querySelectorAll('button'))
+                          .find(b => (b.textContent || '').trim() === label);
+                        return btn && !btn.disabled && btn.offsetParent !== null;
+                      });
+                    }
+                    """,
+                    timeout=10000,
+                )
+
                 if next_page_button.is_visible():
                     next_page_button.click()
                     print("[INFO] Clicked 'Trang sau' button.")
-                    break
-                if next_button.is_visible():
+                elif next_button.is_visible():
                     next_button.click()
                     print("[INFO] Clicked 'Cau tiep theo' button.")
-                    break
-                if retry_button.is_visible():
+                elif retry_button.is_visible():
                     retry_button.click()
                     if chosen_answer_text:
                         wrong_answers.setdefault(question_text, set()).add(chosen_answer_text)
                         print(f"[INFO] Marked wrong answer: {chosen_answer_text}")
                     print("[INFO] Clicked 'Thu lai' button.")
-                    break
-                page.wait_for_timeout(150)
-            else:
+                else:
+                    print("[WARN] Follow-up buttons not visible after wait.")
+            except Exception:
                 print("[WARN] No follow-up button appeared.")
 
         page.wait_for_timeout(200)
