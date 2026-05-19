@@ -3,6 +3,8 @@ import os
 import re
 from typing import Optional
 
+import pyperclip
+
 from playwright.sync_api import Page
 
 LOGIN_URL = "https://edux.cmcu.edu.vn/login"
@@ -49,18 +51,64 @@ def ensure_login_env() -> tuple[str, str]:
 
 
 def load_answers() -> dict[int, str]:
-    answers: dict[int, str] = {}
     with open(ANSWERS_PATH, "r", encoding="utf-8") as handle:
-        for raw in handle:
-            line = raw.strip()
-            if not line:
-                continue
-            match = ANSWER_LINE_RE.match(line)
-            if not match:
-                continue
-            index = int(match.group(1))
-            answer = match.group(2).strip()
-            answers[index] = answer
+        content = handle.read().strip()
+
+    if content.startswith("\ufeff"):
+        content = content.lstrip("\ufeff").lstrip()
+
+    if content.startswith("{") or content.startswith("["):
+        try:
+            data = json.loads(content)
+        except Exception:
+            print("[WARN] answers.txt JSON parse failed. Falling back to line parser.")
+            data = None
+
+        if isinstance(data, dict) and "answers" in data:
+            data = data["answers"]
+
+        answers: dict[int, str] = {}
+        if isinstance(data, list):
+            for item in data:
+                if not isinstance(item, dict):
+                    continue
+                idx = item.get("so_cau") or item.get("soCau") or item.get("question")
+                ans = item.get("dap_an") or item.get("dapAn") or item.get("answer")
+                if idx is None or ans is None:
+                    continue
+                try:
+                    idx_int = int(idx)
+                except Exception:
+                    continue
+                if isinstance(ans, list):
+                    answers[idx_int] = ", ".join(str(x) for x in ans)
+                else:
+                    answers[idx_int] = str(ans).strip()
+        elif isinstance(data, dict):
+            for key, value in data.items():
+                try:
+                    idx_int = int(key)
+                except Exception:
+                    continue
+                if isinstance(value, list):
+                    answers[idx_int] = ", ".join(str(x) for x in value)
+                else:
+                    answers[idx_int] = str(value).strip()
+
+        if answers:
+            return answers
+
+    answers: dict[int, str] = {}
+    for raw in content.splitlines():
+        line = raw.strip()
+        if not line:
+            continue
+        match = ANSWER_LINE_RE.match(line)
+        if not match:
+            continue
+        index = int(match.group(1))
+        answer = match.group(2).strip()
+        answers[index] = answer
     return answers
 
 
@@ -108,6 +156,7 @@ def parse_true_false_answers(answer_value: str, expected_count: int) -> list[boo
     return result
 
 
+
 def test_bruteforce(page: Page) -> None:
     email, password = ensure_login_env()
 
@@ -133,12 +182,20 @@ def test_bruteforce(page: Page) -> None:
         payload_text = response.text()
 
     prompt_line = (
-        "đưa ra danh sách đáp án chỉ gồm số thứ tự câu cùng phương án A,B,C,D "
-        "hoặc từ khóa hoặc văn bản cần điền; với câu đúng/sai, ghi lần lượt "
-        "Đúng/Sai cho từng mệnh đề; không giải thích gì thêm"
+        "trả về JSON, mỗi phần tử gồm so_cau và dap_an; "
+        "dap_an là A/B/C/D hoặc từ/cụm từ/văn bản cần điền; "
+        "với câu đúng/sai, dap_an là mảng giá trị Đúng/Sai theo thứ tự mệnh đề; "
+        "không giải thích gì thêm"
     )
+    prompt_content = payload_text.strip() + "\n\n" + prompt_line + "\n"
     with open(PROMPT_PATH, "w", encoding="utf-8") as handle:
-        handle.write(payload_text.strip() + "\n\n" + prompt_line + "\n")
+        handle.write(prompt_content)
+
+    try:
+        pyperclip.copy(prompt_content)
+        print("[INFO] Prompt copied to clipboard.")
+    except Exception as exc:
+        print(f"[WARN] Clipboard copy failed: {exc}")
 
     print("[INFO] Wrote questions prompt to questions_prompt.txt.")
     print("[INFO] Paste the prompt into AI, save answers into answers.txt, then press Enter to solve.\n")

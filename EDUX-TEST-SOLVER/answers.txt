@@ -1,25 +1,82 @@
-1. A
-2. B
-3. B
-4. B
-5. C
-6. B
-7. B
-8. B
-9. C
-10. B
-11. kiến trúc
-12. tương thích
-13. chất lượng
-14. trực tuyến
-15. nền tảng
-16. Việc sử dụng công nghệ quen thuộc khi phát triển prototype giúp đẩy nhanh tiến độ, tiết kiệm chi phí và giảm thiểu rủi ro kỹ thuật, từ đó nhóm có thể tập trung vào việc kiểm chứng tính năng và thu thập phản hồi từ người dùng thay vì phải xử lý các khó khăn từ công nghệ mới.
-17. Xây dựng user stories dựa trên nhu cầu thực tế của khách hàng và gắn kèm scenarios để làm rõ bối cảnh sử dụng. Các user stories này được đưa vào product backlog và luôn được ưu tiên, đối chiếu khắt khe với tầm nhìn sản phẩm (product vision) trong các buổi sprint planning để đảm bảo không đi lệch hướng.
-18. Agile tạo ra chu trình phát triển lặp lại và tăng dần, cho phép nhóm liên tục phát hành các phần nhỏ của sản phẩm để thu thập phản hồi. Vai trò của Agile là giúp Product Manager nhanh chóng điều chỉnh backlog và thích ứng với thay đổi, đồng thời liên tục đối chiếu mỗi Sprint với tầm nhìn sản phẩm để ngăn chặn tình trạng "vision drift".
-19. Product Manager cần đối chiếu tính năng mới với tầm nhìn sản phẩm (Product Vision) và Roadmap. Nếu tính năng gây "vision drift", PM có quyền từ chối hoặc đưa vào danh sách chờ để xem xét trong tương lai, ưu tiên bảo vệ mục tiêu cốt lõi của Sprint hiện tại và tránh làm lãng phí nguồn lực của đội phát triển.
-20. Giải pháp: Duy trì một Product Vision rõ ràng xuyên suốt dự án; xác định các tiêu chí chấp nhận khắt khe khi thêm tính năng mới vào backlog; thường xuyên đánh giá lại định hướng trong các buổi Sprint Review. Lý do: Đảm bảo mọi tính năng được phát triển đều thực sự mang lại giá trị cốt lõi, tránh bị phân tâm bởi các yêu cầu phát sinh không nhất quán với mục tiêu ban đầu của sản phẩm.
-21. Đúng, Sai, Sai, Sai
-22. Đúng, Sai, Đúng, Sai
-23. Đúng, Sai, Đúng, Sai
-24. Đúng, Sai, Đúng, Sai
-25. Đúng, Sai, Đúng, Sai
+[
+  {
+    "so_cau": 1,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 2,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 3,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 4,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 5,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 6,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 7,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 8,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 9,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 10,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 11,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 12,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 13,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 14,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 15,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 16,
+    "dap_an": "A"
+  },
+  {
+    "so_cau": 17,
+    "dap_an": "hữu hạn"
+  },
+  {
+    "so_cau": 18,
+    "dap_an": "học có giám sát"
+  },
+  {
+    "so_cau": 19,
+    "dap_an": "Quy trình: Trích xuất đặc trưng hình ảnh -> Dùng thuật toán Clustering (VD: K-Means) để gom nhóm ký tự có nét tương đồng -> Gán nhãn cho từng cụm dựa trên kiểm tra thủ công một vài mẫu. Lợi ích: Không cần gán nhãn trước toàn bộ dữ liệu, tiết kiệm chi phí và thời gian. Hạn chế: Độ chính xác không cao, các chữ cái có nét giống nhau dễ bị xếp sai cụm, khó kiểm soát chất lượng."
+  },
+  {
+    "so_cau": 20,
+    "dap_an": "Sự khác biệt: Supervised learning dùng 100% dữ liệu có nhãn, Unsupervised learning dùng dữ liệu không nhãn, trong khi Semi-supervised learning kết hợp cả hai (một lượng nhỏ dữ liệu có nhãn và lượng lớn dữ liệu không nhãn) để cải thiện mô hình. Ví dụ: Phân loại ảnh y khoa (X-quang, MRI) - việc nhờ bác sĩ gán nhãn cho hàng triệu ảnh rất tốn kém, do đó người ta chỉ gán nhãn một số ít ảnh, sau đó dùng Semi-supervised learning để dự đoán nhãn cho các ảnh còn lại và huấn luyện toàn bộ."
+  }
+]
