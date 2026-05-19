@@ -6,6 +6,8 @@ import os
 import sys
 import keyboard
 import numpy as np
+import re
+import hashlib
 from fuzzywuzzy import fuzz
 from PIL import Image
 
@@ -14,16 +16,25 @@ BUTTON_IMAGE_PATH = r'..\buttons\show_question_button.png'
 CHECK_BUTTON_PATH = r'..\buttons\check_answer_button.png'
 NEXT_BUTTON_PATH = r'..\buttons\next_page_button.png'
 
-OLLAMA_MODEL = 'hf.co/arcee-ai/Arcee-VyLinh-GGUF:Q8_0'
+OLLAMA_MODEL = 'hf.co/arcee-ai/Arcee-VyLinh-GGUF:Q8_0 '
 LANGUAGES = ['vi']
 CONFIDENCE_THRESHOLD = 0.8  
-FUZZY_MATCH_THRESHOLD = 85  
+FUZZY_MATCH_THRESHOLD = 80  
+OLLAMA_KEEP_ALIVE_SECONDS = 600
 SYSTEM_PROMPT = """Bạn là trợ lí thông minh chuyên trả lời câu hỏi. Yêu cầu:
 1. Xác định câu trả lời đúng. 
 2. Trả về CHÍNH XÁC nguyên văn dòng text của đáp án đó xuất hiện trên màn hình (gồm cả ký tự A/B/C/D và đáp án). 
 3. KHÔNG giải thích, KHÔNG thêm lời dẫn. 
 Ví dụ: Nếu đáp án đúng là 'C. Hà Nội', hãy in ra chính xác: C. Hà Nội.
 """
+ANSWER_LINE_PATTERN = re.compile(r"^[A-Da-d][\)\.]?\s+\S+")
+
+# Ollama options tuned for lower latency without changing model
+OLLAMA_OPTIONS = {
+    "temperature": 0.1,
+    "top_p": 0.3,
+    "num_predict": 64,
+}
 
 # PyAutoGUI Safety
 pyautogui.FAILSAFE = True
@@ -111,7 +122,28 @@ def check_ollama_connection():
         print(f"[!] Could not connect to Ollama. Is it running? Error: {e}")
         return False
 
-def solve_quiz(reader):
+def extract_relevant_text(ocr_results):
+    """
+    Extracts a compact question + answers block to reduce prompt size.
+    Falls back to full OCR text if no answer-like lines are found.
+    """
+    lines = [res[1].strip() for res in ocr_results if res[1].strip()]
+    if not lines:
+        return "", []
+
+    answer_indices = [i for i, line in enumerate(lines) if ANSWER_LINE_PATTERN.match(line)]
+    if not answer_indices:
+        return ". ".join(lines), lines
+
+    first_ans = answer_indices[0]
+    last_ans = answer_indices[-1]
+    question_lines = lines[:first_ans]
+    answer_lines = lines[first_ans:last_ans + 1]
+
+    compact_lines = question_lines + answer_lines
+    return "\n".join(compact_lines).strip(), lines
+
+def solve_quiz(reader, answer_cache):
     script_dir = os.path.dirname(os.path.abspath(__file__))
     abs_show_path = os.path.join(script_dir, BUTTON_IMAGE_PATH)
     abs_check_path = os.path.join(script_dir, CHECK_BUTTON_PATH)
@@ -120,7 +152,7 @@ def solve_quiz(reader):
     # 1. Click 'Show Question'
     # We try this, but if not found, we assume the question might already be visible
     if find_and_click_image(abs_show_path, "Show Question Button"):
-        time.sleep(1) 
+        time.sleep(0.8) 
 
     # 2. Capture Screen
     print("[*] Capturing screen...")
@@ -135,30 +167,42 @@ def solve_quiz(reader):
     print("[*] Reading text (OCR)...")
     ocr_results = reader.readtext(screenshot_np, detail=1)
     
-    full_text_lines = [res[1] for res in ocr_results]
-    full_text_block = ' '.join(full_text_lines).strip()
-    
-    if not full_text_block:
+    compact_text, full_text_lines = extract_relevant_text(ocr_results)
+    if not compact_text:
         print("[!] No text detected on screen.")
         return
 
-    print(f"\n--- Screen Content ---\n{full_text_block}\n----------------------")
+    print(f"\n--- Screen Content (Compact) ---\n{compact_text}\n----------------------")
 
-    # 4. Query AI
-    print(f"[*] Sending to AI ({OLLAMA_MODEL})...")
-    prompt = f"Dưới đây là nội dung câu hỏi và các đáp án có thể chọn trên màn hình:\n{full_text_block}\nCÂU TRẢ LỜI CỦA BẠN: "
+    cache_key = hashlib.sha1(compact_text.encode("utf-8")).hexdigest()
+    if cache_key in answer_cache:
+        ai_answer_text = answer_cache[cache_key]
+        print(f"\n=== AI ANSWER (CACHED): {ai_answer_text} ===\n")
+    else:
+        # 4. Query AI
+        print(f"[*] Sending to AI ({OLLAMA_MODEL})...")
+        prompt = (
+            "Dưới đây là nội dung câu hỏi và các đáp án có thể chọn trên màn hình:\n"
+            f"{compact_text}\n"
+            "CÂU TRẢ LỜI CỦA BẠN: "
+        )
 
+        try:
+            response = ollama.chat(model=OLLAMA_MODEL, messages=[
+                {'role': 'system', 'content': SYSTEM_PROMPT},
+                {'role': 'user', 'content': prompt}
+            ], options=OLLAMA_OPTIONS, keep_alive=OLLAMA_KEEP_ALIVE_SECONDS)
+            
+            ai_answer_text = response['message']['content'].strip()
+            answer_cache[cache_key] = ai_answer_text
+            
+            print(f"\n=== AI ANSWER: {ai_answer_text} ===\n")
+        except Exception as e:
+            print(f"[!] Error during AI/Click sequence: {e}")
+            return
+
+    # 5. Click Answer
     try:
-        response = ollama.chat(model=OLLAMA_MODEL, messages=[
-            {'role': 'system', 'content': SYSTEM_PROMPT},
-            {'role': 'user', 'content': prompt}
-        ])
-        
-        ai_answer_text = response['message']['content'].strip()
-        
-        print(f"\n=== AI ANSWER: {ai_answer_text} ===\n")
-
-        # 5. Click Answer
         click_coords = find_best_match_location(ai_answer_text, ocr_results)
 
         if click_coords:
@@ -175,7 +219,6 @@ def solve_quiz(reader):
             
         else:
             print(f"[!] Could not locate answer '{ai_answer_text}' on screen.")
-        
     except Exception as e:
         print(f"[!] Error during AI/Click sequence: {e}")
 
@@ -202,6 +245,8 @@ def main():
     print(" [Esc] -> Quit")
     print("="*50 + "\n")
 
+    answer_cache = {}
+
     # Main Loop
     while True:
         try:
@@ -215,7 +260,7 @@ def main():
                 print("\n>>> [Manual] 'F' Triggered")
                 while keyboard.is_pressed('f'): time.sleep(0.1) 
                 
-                solve_quiz(reader)
+                solve_quiz(reader, answer_cache)
                 print("\n[*] Manual sequence finished.")
 
             # --- AUTO MODE (G) ---
@@ -224,8 +269,8 @@ def main():
                 while keyboard.is_pressed('g'): time.sleep(0.1) 
                 
                 while True:
-                    solve_quiz(reader)
-                    time.sleep(1)
+                    solve_quiz(reader, answer_cache)
+                    time.sleep(0.5)
 
             time.sleep(0.05)
             
