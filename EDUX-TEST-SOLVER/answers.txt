@@ -1,0 +1,20 @@
+1.  C
+2.  B
+3.  C
+4.  B
+5.  A
+6.  A
+7.  A
+8.  C
+9.  B
+10. B
+11. C
+12. B
+13. A
+14. A
+15. D
+16. C
+17. Controller
+18. HTTPS (hoặc SSL/TLS / Mã hóa)
+19. Front-end: Xử lý giao diện, tương tác người dùng (Client-side). Back-end: Xử lý logic nghiệp vụ, quản lý cơ sở dữ liệu (Server-side).
+20. Client gửi yêu cầu (Request), Server tiếp nhận, xử lý và trả về kết quả (Response). Ví dụ: Trình duyệt web yêu cầu tải một trang web từ máy chủ.
