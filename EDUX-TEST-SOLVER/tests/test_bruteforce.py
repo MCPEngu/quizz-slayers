@@ -1,3 +1,4 @@
+import json
 import os
 import re
 from typing import Optional
@@ -7,9 +8,11 @@ from playwright.sync_api import Page
 LOGIN_URL = "https://edux.cmcu.edu.vn/login"
 ENV_PATH = os.path.join(os.path.dirname(__file__), "..", ".env")
 ANSWERS_PATH = os.path.join(os.path.dirname(__file__), "..", "answers.txt")
+PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "questions_prompt.txt")
 
 QUESTION_LABEL_RE = re.compile(r"^Câu\s+(\d+)")
 ANSWER_LINE_RE = re.compile(r"^(\d+)\.(.*)$")
+TF_TOKEN_RE = re.compile(r"(\d+)\s*\.\s*(đúng|sai|true|false|d|đ|s|t|f|1|0)", re.IGNORECASE)
 
 
 def load_env_file() -> None:
@@ -84,9 +87,29 @@ def normalize_text(text: str) -> str:
     return " ".join(text.lower().split())
 
 
+def parse_true_false_answers(answer_value: str, expected_count: int) -> list[bool]:
+    normalized = normalize_text(answer_value)
+    pairs = TF_TOKEN_RE.findall(normalized)
+    if pairs:
+        result: list[bool] = []
+        for _, token in pairs:
+            result.append(token in {"đúng", "d", "đ", "true", "t", "1"})
+        return result
+
+    tokens = re.findall(r"[a-zà-ỹ]+|\d", normalized)
+    result = []
+    for token in tokens:
+        if token in {"đúng", "d", "đ", "true", "t", "1"}:
+            result.append(True)
+        elif token in {"sai", "s", "false", "f", "0"}:
+            result.append(False)
+        if len(result) >= expected_count:
+            break
+    return result
+
+
 def test_bruteforce(page: Page) -> None:
     email, password = ensure_login_env()
-    answers = load_answers()
 
     page.goto(LOGIN_URL, wait_until="domcontentloaded")
     page.locator("#email").fill(email)
@@ -94,8 +117,34 @@ def test_bruteforce(page: Page) -> None:
     page.locator("#password").press("Enter")
 
     print("\n[INFO] Auto-login attempted. Finish navigation to the test.")
-    print("[INFO] When the test dialog is open, press Enter to start.\n")
+    print("[INFO] When ready to start, press Enter to click 'Lam bai tap' and capture payload.\n")
     input()
+
+    start_button = page.get_by_role("button", name="Làm bài tập")
+    with page.expect_response(lambda resp: "start" in resp.url, timeout=20000) as response_info:
+        start_button.click()
+
+    response = response_info.value
+    payload_text = ""
+    try:
+        payload_json = response.json()
+        payload_text = json.dumps(payload_json, ensure_ascii=False, indent=2)
+    except Exception:
+        payload_text = response.text()
+
+    prompt_line = (
+        "đưa ra danh sách đáp án chỉ gồm số thứ tự câu cùng phương án A,B,C,D "
+        "hoặc từ khóa hoặc văn bản cần điền; với câu đúng/sai, ghi lần lượt "
+        "Đúng/Sai cho từng mệnh đề; không giải thích gì thêm"
+    )
+    with open(PROMPT_PATH, "w", encoding="utf-8") as handle:
+        handle.write(payload_text.strip() + "\n\n" + prompt_line + "\n")
+
+    print("[INFO] Wrote questions prompt to questions_prompt.txt.")
+    print("[INFO] Paste the prompt into AI, save answers into answers.txt, then press Enter to solve.\n")
+    input()
+
+    answers = load_answers()
 
     dialog = page.locator("div[role='dialog'][data-slot='dialog-content']")
     options_locator = dialog.locator(
@@ -103,6 +152,7 @@ def test_bruteforce(page: Page) -> None:
     )
     input_locator = dialog.locator("input[type='text']")
     textarea_locator = dialog.locator("textarea")
+    true_false_blocks = dialog.locator("div.border.border-gray-200.rounded-lg.p-3.bg-gray-50")
     next_button = page.get_by_role("button", name="Câu tiếp")
     submit_button = page.get_by_role("button", name="Nộp bài")
 
@@ -137,7 +187,20 @@ def test_bruteforce(page: Page) -> None:
         if not answer_value:
             print(f"[WARN] No answer for question {question_index}. Skipping.")
         else:
-            if textarea_locator.is_visible():
+            if true_false_blocks.first.is_visible():
+                blocks_count = true_false_blocks.count()
+                tf_answers = parse_true_false_answers(answer_value, blocks_count)
+                if len(tf_answers) < blocks_count:
+                    print("[WARN] Not enough true/false answers to fill.")
+                else:
+                    print(f"[INFO] Question {question_index}: filling true/false")
+                    for i in range(blocks_count):
+                        block = true_false_blocks.nth(i)
+                        if tf_answers[i]:
+                            block.get_by_role("button", name="Đúng").click()
+                        else:
+                            block.get_by_role("button", name="Sai").click()
+            elif textarea_locator.is_visible():
                 print(f"[INFO] Question {question_index}: filling textarea")
                 textarea_locator.fill(answer_value)
             elif input_locator.is_visible():

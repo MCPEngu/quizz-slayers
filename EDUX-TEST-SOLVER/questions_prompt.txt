@@ -1,0 +1,340 @@
+{
+  "code": "200",
+  "message": "Tiếp tục bài kiểm tra đang làm dở cho model 1fe91e76-2fdc-4260-b726-64e7f366e5ab",
+  "data": {
+    "action": "resume_session",
+    "model_id": "1fe91e76-2fdc-4260-b726-64e7f366e5ab",
+    "session_id": "bdd4c8b2-cb25-419d-833b-476db90e073a",
+    "title": "Bài kiểm tra - 01 Software Products",
+    "subject": null,
+    "difficulty": "medium",
+    "total_questions": 25,
+    "estimated_time": 60,
+    "exam_id": "de88dc8f-32f9-4837-887b-2b373022416d",
+    "exam_data": {
+      "multiple_choice": [
+        {
+          "id": 1,
+          "question_id": "e1483327-0ca0-4053-afcd-89e8d9941c80",
+          "question": "Để sản phẩm CRM-Innovator hấp dẫn khách hàng doanh nghiệp vừa, yếu tố nào quan trọng nhất?",
+          "options": {
+            "A": "Giá thành hợp lý và tính năng phù hợp nhu cầu",
+            "B": "Số lượng module càng nhiều càng tốt",
+            "C": "Thiết kế giao diện phức tạp",
+            "D": "Chỉ tập trung vào marketing"
+          },
+          "topic": "e1483327-0ca0-4053-afcd-89e8d9941c80 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 2,
+          "question_id": "ea511f82-a5f0-44cb-a6b8-1d2847eed161",
+          "question": "Bạn là product manager, làm sao để tránh 'vision drift' khi phát triển sản phẩm?",
+          "options": {
+            "A": "Chỉ tập trung vào phản hồi khách hàng",
+            "B": "Luôn đánh giá thay đổi dựa trên product vision",
+            "C": "Ưu tiên mọi đề xuất của đội phát triển",
+            "D": "Tăng số lượng tính năng càng nhiều càng tốt"
+          },
+          "topic": "ea511f82-a5f0-44cb-a6b8-1d2847eed161 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 3,
+          "question_id": "bb922690-ad4a-452d-8c53-eac5ea6eac67",
+          "question": "Nếu một sản phẩm không bán được trên thị trường, giải pháp nào sau đây phù hợp nhất?",
+          "options": {
+            "A": "Tiếp tục phát triển không giới hạn",
+            "B": "Cắt giảm chi phí bằng cách ngừng phát triển sản phẩm",
+            "C": "Chỉ tập trung vào tính năng mới",
+            "D": "Bỏ qua ý kiến khách hàng"
+          },
+          "topic": "bb922690-ad4a-452d-8c53-eac5ea6eac67 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 4,
+          "question_id": "b242fe32-9361-4169-a89d-04d3da7bd381",
+          "question": "Lý do nào khiến việc xây dựng product roadmap cần có sự tham gia của cả đội phát triển, quản lý và marketing?",
+          "options": {
+            "A": "Để tiết kiệm chi phí phát triển",
+            "B": "Đảm bảo đáp ứng đúng nhu cầu thị trường và các mốc thời gian quan trọng",
+            "C": "Giảm số lượng tính năng",
+            "D": "Tăng số lượng lập trình viên"
+          },
+          "topic": "b242fe32-9361-4169-a89d-04d3da7bd381 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 5,
+          "question_id": "d8a21add-576d-466e-a03b-bc26ae820376",
+          "question": "Sản phẩm phần mềm dạng hybrid có đặc điểm gì?",
+          "options": {
+            "A": "Chỉ chạy trên máy khách hàng",
+            "B": "Tất cả tính năng chạy từ Internet",
+            "C": "Một số tính năng chạy cục bộ, số khác truy cập từ Internet",
+            "D": "Chỉ có thể sử dụng offline"
+          },
+          "topic": "d8a21add-576d-466e-a03b-bc26ae820376 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 6,
+          "question_id": "1ce2b8d2-a4ad-4f03-83d4-5a1f4707c312",
+          "question": "Khi xây dựng backlog sản phẩm, product manager nên ưu tiên yếu tố nào?",
+          "options": {
+            "A": "Độ phức tạp kỹ thuật",
+            "B": "Mức độ quan trọng với mục tiêu kinh doanh và khách hàng",
+            "C": "Số lượng thành viên nhóm phát triển",
+            "D": "Thời gian hoàn thành ngắn nhất"
+          },
+          "topic": "1ce2b8d2-a4ad-4f03-83d4-5a1f4707c312 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 7,
+          "question_id": "74a22af7-942f-48b9-b024-bb94dcdead3d",
+          "question": "Hãy đề xuất một giải pháp giúp product manager hiểu rõ hơn về nhu cầu khách hàng mục tiêu khi phát triển phần mềm mới.",
+          "options": {
+            "A": "Chỉ dựa vào kinh nghiệm cá nhân",
+            "B": "Tiến hành nghiên cứu thị trường và khảo sát người dùng tiềm năng",
+            "C": "Tăng chi phí quảng cáo",
+            "D": "Phát triển sản phẩm theo ý kiến đội kỹ thuật"
+          },
+          "topic": "74a22af7-942f-48b9-b024-bb94dcdead3d + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 8,
+          "question_id": "beed4ec5-a7a5-4a28-97fb-614ce2dc1cb9",
+          "question": "Phân tích tác động nếu sản phẩm phần mềm ra mắt chậm hơn đối thủ cạnh tranh?",
+          "options": {
+            "A": "Khách hàng sẽ luôn chờ đợi sản phẩm tốt hơn",
+            "B": "Sản phẩm có thể thất bại do khách hàng đã đầu tư vào sản phẩm trước đó",
+            "C": "Không ảnh hưởng đến doanh số",
+            "D": "Sản phẩm sẽ tự động thành công nếu chất lượng tốt"
+          },
+          "topic": "beed4ec5-a7a5-4a28-97fb-614ce2dc1cb9 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 9,
+          "question_id": "e9712597-9365-49d5-9e8f-4ce0b077eb9b",
+          "question": "Tại sao việc phát triển prototype lại quan trọng trước khi xây dựng sản phẩm phần mềm mới?",
+          "options": {
+            "A": "Giúp kiểm tra hiệu suất máy chủ",
+            "B": "Để giảm chi phí marketing",
+            "C": "Để kiểm chứng ý tưởng và nhận phản hồi thực tế",
+            "D": "Tăng tốc độ lập trình"
+          },
+          "topic": "e9712597-9365-49d5-9e8f-4ce0b077eb9b + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 10,
+          "question_id": "29b2f934-37ff-4629-8b54-030e35ac2eb2",
+          "question": "Điểm khác biệt chính giữa sản phẩm phần mềm dự án và sản phẩm phần mềm thương mại là gì?",
+          "options": {
+            "A": "Thời gian phát triển sản phẩm",
+            "B": "Khả năng thay đổi và rút sản phẩm khỏi thị trường",
+            "C": "Ngôn ngữ lập trình sử dụng",
+            "D": "Số lượng lập trình viên tham gia"
+          },
+          "topic": "29b2f934-37ff-4629-8b54-030e35ac2eb2 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        }
+      ],
+      "fill_in_blank": [
+        {
+          "id": 11,
+          "question_id": "754b6207-5b81-4a4f-a9ee-b079e60f9a3c",
+          "question": "Trích từ tài liệu, một nguyên mẫu (prototype) có thể được sử dụng để xác định các thành phần phần mềm cơ bản hoặc _____ và kiểm thử công nghệ.",
+          "topic": "754b6207-5b81-4a4f-a9ee-b079e60f9a3c + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 12,
+          "question_id": "7de6b735-a0e1-4ff4-8c66-e10566417075",
+          "question": "Theo tài liệu, trải nghiệm khách hàng bị giới hạn bởi các ràng buộc như khả năng _____ giữa các hệ thống, ảnh hưởng đến sự linh hoạt khi mua phần mềm mới.",
+          "topic": "7de6b735-a0e1-4ff4-8c66-e10566417075 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 13,
+          "question_id": "464fce52-de8f-4fea-97eb-9d092d2d9944",
+          "question": "Theo nguồn tài liệu, các ràng buộc về công nghệ mà quản lý dự án cần làm rõ cho nhóm phát triển có thể ảnh hưởng đến lịch trình, chi phí và _____ của sản phẩm.",
+          "topic": "464fce52-de8f-4fea-97eb-9d092d2d9944 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 14,
+          "question_id": "647602e1-d247-495d-b6b0-add544a5938e",
+          "question": "Theo nguồn tài liệu, trong hệ thống lai (hybrid system), một số tính năng được thực hiện cục bộ còn các tính năng khác được truy cập _____ qua Internet.",
+          "topic": "647602e1-d247-495d-b6b0-add544a5938e + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 15,
+          "question_id": "26e093e2-92f1-4ed4-bdb1-8c8ad145f894",
+          "question": "Dựa trên tài liệu, đặc điểm nổi bật của sản phẩm thuộc dòng sản phẩm phần mềm là chia sẻ một _____ chung, nhưng mỗi sản phẩm đều có sự thích ứng riêng theo từng khách hàng.",
+          "topic": "26e093e2-92f1-4ed4-bdb1-8c8ad145f894 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        }
+      ],
+      "essay": [
+        {
+          "id": 16,
+          "question_id": "9790f4cb-5e5a-4395-ac55-5125ed0ad6f7",
+          "question": "Đánh giá tác động của việc sử dụng công nghệ quen thuộc khi phát triển prototype trong phương pháp Agile đối với hiệu quả và rủi ro của dự án.",
+          "max_points": 0.4,
+          "topic": "9790f4cb-5e5a-4395-ac55-5125ed0ad6f7 + de88dc8f-32f9-4837-887b-2b373022416d"
+        },
+        {
+          "id": 17,
+          "question_id": "ed3b452a-bda2-430c-9bf5-e69369af8420",
+          "question": "Áp dụng phương pháp Agile, hãy trình bày cách bạn sẽ sử dụng user stories và scenarios để phát triển tính năng mới cho một sản phẩm phần mềm, đồng thời đảm bảo sự nhất quán với tầm nhìn sản phẩm.",
+          "max_points": 0.4,
+          "topic": "ed3b452a-bda2-430c-9bf5-e69369af8420 + de88dc8f-32f9-4837-887b-2b373022416d"
+        },
+        {
+          "id": 18,
+          "question_id": "17f358b4-cf0a-4b6b-aa43-61c3d3a73348",
+          "question": "Giải thích vai trò của phương pháp Agile trong việc quản lý và phát triển sản phẩm phần mềm, đặc biệt trong việc đảm bảo sự phù hợp với tầm nhìn sản phẩm.",
+          "max_points": 0.4,
+          "topic": "17f358b4-cf0a-4b6b-aa43-61c3d3a73348 + de88dc8f-32f9-4837-887b-2b373022416d"
+        },
+        {
+          "id": 19,
+          "question_id": "b435397a-b685-45b8-958e-62afdc614a64",
+          "question": "Một nhóm phát triển nhận được đề xuất thêm tính năng mới từ bộ phận marketing, tuy nhiên tính năng này có nguy cơ gây \"vision drift\". Phân tích quy trình đánh giá và quyết định của Product Manager theo phương pháp Agile để xử lý tình huống này.",
+          "max_points": 0.4,
+          "topic": "b435397a-b685-45b8-958e-62afdc614a64 + de88dc8f-32f9-4837-887b-2b373022416d"
+        },
+        {
+          "id": 20,
+          "question_id": "17448d4e-31e2-410c-87cd-b38a33668b48",
+          "question": "Giả sử bạn là Product Manager, hãy đề xuất giải pháp ngăn ngừa tình trạng \"vision drift\" trong quá trình phát triển sản phẩm phần mềm theo phương pháp Agile. Giải thích lý do lựa chọn các giải pháp đó.",
+          "max_points": 0.4,
+          "topic": "17448d4e-31e2-410c-87cd-b38a33668b48 + de88dc8f-32f9-4837-887b-2b373022416d"
+        }
+      ],
+      "true_false": [
+        {
+          "id": 21,
+          "question_id": "29fb140f-1e01-4484-afcc-6e2ac67b915d",
+          "question": "Xem xét các phát biểu về sự khác biệt giữa phát triển phần mềm dự án và sản phẩm:",
+          "statements": [
+            {
+              "text": "Phát triển phần mềm dự án chủ yếu phục vụ yêu cầu riêng của từng khách hàng."
+            },
+            {
+              "text": "Sản phẩm phần mềm không cần thích nghi với thay đổi yêu cầu của thị trường."
+            },
+            {
+              "text": "Kỹ thuật dự án được điều chỉnh để phù hợp với phát triển sản phẩm đại trà."
+            },
+            {
+              "text": "Khách hàng dự án không bao giờ thay đổi yêu cầu trong quá trình phát triển."
+            }
+          ],
+          "topic": "29fb140f-1e01-4484-afcc-6e2ac67b915d + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 22,
+          "question_id": "e205d114-bb01-4ec2-b45b-60dfcd39e077",
+          "question": "Đánh giá các phát biểu về kiểm thử khách hàng trong phát triển sản phẩm phần mềm:",
+          "statements": [
+            {
+              "text": "Kiểm thử khách hàng giúp thu thập phản hồi về tính năng và khả năng sử dụng sản phẩm."
+            },
+            {
+              "text": "Chỉ có nhóm phát triển nội bộ tham gia kiểm thử khách hàng."
+            },
+            {
+              "text": "Phản hồi từ kiểm thử khách hàng có thể dẫn đến thay đổi sản phẩm."
+            },
+            {
+              "text": "Kiểm thử khách hàng không liên quan đến đánh giá giá trị kinh doanh."
+            }
+          ],
+          "topic": "e205d114-bb01-4ec2-b45b-60dfcd39e077 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 23,
+          "question_id": "f52d993e-629f-45b9-8511-47dbce097062",
+          "question": "Đánh giá các phát biểu về vai trò của product manager trong phát triển sản phẩm phần mềm:",
+          "statements": [
+            {
+              "text": "Product manager chịu trách nhiệm sở hữu tầm nhìn sản phẩm."
+            },
+            {
+              "text": "Product manager không tham gia lựa chọn khách hàng cho kiểm thử."
+            },
+            {
+              "text": "Product manager góp phần phát triển backlog sản phẩm."
+            },
+            {
+              "text": "Product manager chỉ làm việc với bộ phận kỹ thuật, không liên quan đến người dùng."
+            }
+          ],
+          "topic": "f52d993e-629f-45b9-8511-47dbce097062 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 24,
+          "question_id": "c3eedbbe-206f-4d2c-9bb2-b1352c7a617b",
+          "question": "Phân tích các phát biểu về tác động của công nghệ đến kiến trúc sản phẩm phần mềm:",
+          "statements": [
+            {
+              "text": "Việc lựa chọn công nghệ có thể buộc phải điều chỉnh lại kiến trúc sản phẩm."
+            },
+            {
+              "text": "Công nghệ dự kiến luôn đáp ứng đầy đủ yêu cầu tải của hệ thống."
+            },
+            {
+              "text": "Thay đổi công nghệ có thể phát sinh khi phát hiện hạn chế trong quá trình thử nghiệm."
+            },
+            {
+              "text": "Thiết kế nguyên mẫu luôn đảm bảo vận hành tốt trong mọi điều kiện thực tế."
+            }
+          ],
+          "topic": "c3eedbbe-206f-4d2c-9bb2-b1352c7a617b + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        },
+        {
+          "id": 25,
+          "question_id": "ffbde534-767f-4a63-b6d9-ba8f500468f4",
+          "question": "Phân tích các phát biểu về vai trò của backlog trong phát triển sản phẩm phần mềm:",
+          "statements": [
+            {
+              "text": "Backlog là danh sách công việc cần hoàn thành trong phát triển sản phẩm."
+            },
+            {
+              "text": "Backlog được xây dựng cố định ngay từ đầu và không thay đổi."
+            },
+            {
+              "text": "Backlog được bổ sung và điều chỉnh liên tục trong quá trình phát triển."
+            },
+            {
+              "text": "Backlog chỉ bao gồm các yêu cầu kỹ thuật, không liên quan đến người dùng."
+            }
+          ],
+          "topic": "ffbde534-767f-4a63-b6d9-ba8f500468f4 + de88dc8f-32f9-4837-887b-2b373022416d",
+          "max_points": 0.4
+        }
+      ]
+    },
+    "created_at": 1779200339,
+    "instructions": [
+      "Đọc kỹ câu hỏi trước khi trả lời",
+      "Với câu trắc nghiệm, chọn 1 đáp án A, B, C, hoặc D",
+      "Với câu điền từ, điền từ/cụm từ phù hợp vào chỗ trống",
+      "Với câu tự luận, trình bày đầy đủ và logic",
+      "Kiểm tra lại bài làm trước khi nộp"
+    ]
+  }
+}
+
+đưa ra danh sách đáp án chỉ gồm số thứ tự câu cùng phương án A,B,C,D hoặc từ khóa hoặc văn bản cần điền; với câu đúng/sai, ghi lần lượt Đúng/Sai cho từng mệnh đề; không giải thích gì thêm
