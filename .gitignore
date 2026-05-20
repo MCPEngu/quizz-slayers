@@ -1,0 +1,6 @@
+.env
+EDUX-TEST-SOLVER/answers.txt
+EDUX-TEST-SOLVER/questions_prompt.txt
+__pycache__/
+*.py[cod]
+.pytest_cache/
