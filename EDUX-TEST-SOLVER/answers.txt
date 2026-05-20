@@ -1,19 +1,19 @@
 [
   {
     "so_cau": 1,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 2,
-    "dap_an": "A"
+    "dap_an": "C"
   },
   {
     "so_cau": 3,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 4,
-    "dap_an": "A"
+    "dap_an": "C"
   },
   {
     "so_cau": 5,
@@ -21,23 +21,23 @@
   },
   {
     "so_cau": 6,
-    "dap_an": "A"
+    "dap_an": "D"
   },
   {
     "so_cau": 7,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 8,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 9,
-    "dap_an": "A"
+    "dap_an": "D"
   },
   {
     "so_cau": 10,
-    "dap_an": "A"
+    "dap_an": "C"
   },
   {
     "so_cau": 11,
@@ -45,7 +45,7 @@
   },
   {
     "so_cau": 12,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 13,
@@ -57,26 +57,26 @@
   },
   {
     "so_cau": 15,
-    "dap_an": "A"
+    "dap_an": "B"
   },
   {
     "so_cau": 16,
-    "dap_an": "A"
+    "dap_an": "C"
   },
   {
     "so_cau": 17,
-    "dap_an": "hữu hạn"
+    "dap_an": "song song"
   },
   {
     "so_cau": 18,
-    "dap_an": "học có giám sát"
+    "dap_an": "Reduce"
   },
   {
     "so_cau": 19,
-    "dap_an": "Quy trình: Trích xuất đặc trưng hình ảnh -> Dùng thuật toán Clustering (VD: K-Means) để gom nhóm ký tự có nét tương đồng -> Gán nhãn cho từng cụm dựa trên kiểm tra thủ công một vài mẫu. Lợi ích: Không cần gán nhãn trước toàn bộ dữ liệu, tiết kiệm chi phí và thời gian. Hạn chế: Độ chính xác không cao, các chữ cái có nét giống nhau dễ bị xếp sai cụm, khó kiểm soát chất lượng."
+    "dap_an": "YARN (Yet Another Resource Negotiator) đóng vai trò như một hệ điều hành phân tán cho cụm Hadoop, chịu trách nhiệm quản lý tài nguyên (CPU, RAM) và lập lịch công việc. YARN tách biệt chức năng quản lý tài nguyên và quản lý vòng đời ứng dụng thành hai thành phần chính: ResourceManager (toàn cục) và ApplicationMaster (mỗi ứng dụng). So với kiến trúc MapReduce v1 cũ (sử dụng JobTracker/TaskTracker bị thắt nút cổ chai ở JobTracker), YARN linh hoạt hơn, có khả năng mở rộng quy mô lớn hơn và cho phép chạy nhiều công cụ xử lý dữ liệu khác nhau (như Spark, Flink) trên cùng một cụm Hadoop thay vì chỉ giới hạn ở MapReduce."
   },
   {
     "so_cau": 20,
-    "dap_an": "Sự khác biệt: Supervised learning dùng 100% dữ liệu có nhãn, Unsupervised learning dùng dữ liệu không nhãn, trong khi Semi-supervised learning kết hợp cả hai (một lượng nhỏ dữ liệu có nhãn và lượng lớn dữ liệu không nhãn) để cải thiện mô hình. Ví dụ: Phân loại ảnh y khoa (X-quang, MRI) - việc nhờ bác sĩ gán nhãn cho hàng triệu ảnh rất tốn kém, do đó người ta chỉ gán nhãn một số ít ảnh, sau đó dùng Semi-supervised learning để dự đoán nhãn cho các ảnh còn lại và huấn luyện toàn bộ."
+    "dap_an": "Quy trình xử lý dữ liệu trong MapReduce gồm các bước chính: 1. Input: Dữ liệu được chia nhỏ thành các khối (splits) và đọc từ HDFS. 2. Map: Hàm Map xử lý từng bản ghi trong khối dữ liệu và chuyển đổi thành các cặp <key, value> trung gian. 3. Shuffle & Sort: Hệ thống tự động phân nhóm và sắp xếp các cặp <key, value> trung gian theo key, đảm bảo tất cả các value có cùng một key sẽ được gửi đến cùng một Reducer. 4. Reduce: Hàm Reduce nhận các cặp key và danh sách các value tương ứng, sau đó tổng hợp, tính toán để tạo ra kết quả rút gọn cuối cùng. 5. Output: Kết quả từ Reducer được ghi trở lại vào hệ thống lưu trữ phân tán (như HDFS)."
   }
 ]

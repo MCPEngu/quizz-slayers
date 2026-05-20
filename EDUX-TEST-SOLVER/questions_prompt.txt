@@ -1,258 +1,258 @@
 {
   "code": "200",
-  "message": "Tạo bài kiểm tra ngẫu nhiên thành công cho model fd996ef8-f041-4fad-865a-1b82598bb142 với độ khó medium",
+  "message": "Tạo bài kiểm tra ngẫu nhiên thành công cho model 50e3f9f9-8543-403e-9952-fc9cb173da0b với độ khó medium",
   "data": {
     "action": "new_session",
-    "model_id": "fd996ef8-f041-4fad-865a-1b82598bb142",
+    "model_id": "50e3f9f9-8543-403e-9952-fc9cb173da0b",
     "shuffle_mode": "single_exam",
-    "session_id": "dffe9fb3-91e1-459e-bf40-7159e7b92260",
-    "title": "Bài kiểm tra - 1.1 Machine Learning Introduction",
+    "session_id": "300b2e62-b3c1-47aa-a068-cecd121b4be6",
+    "title": "Bài kiểm tra - Cloud Computing - Chương 3 - Cloud Data Management",
     "difficulty": "medium",
     "ai_provider": "gemini",
     "total_questions": 20,
     "estimated_time": 60,
-    "exam_id": "d6643a9b-9b40-4256-a05c-06f029d5c83a",
+    "exam_id": "11609907-9100-48a8-a28f-757d34dde5f4",
     "exam_data": {
       "multiple_choice": [
         {
           "id": 1,
-          "question_id": "d9925224-3203-43a8-9dd7-11599693fc79",
-          "question": "Hãy giải thích sự khác biệt giữa supervised learning và unsupervised learning trong Machine Learning.",
+          "question_id": "f86e9504-dc7f-41dc-a247-05de3fd43071",
+          "question": "Mục tiêu của Fault Tolerance trong Hadoop là gì?",
           "options": {
-            "A": "Supervised learning sử dụng dữ liệu có nhãn, unsupervised learning không dùng nhãn.",
-            "B": "Supervised learning không cần dữ liệu, unsupervised learning cần nhãn.",
-            "C": "Supervised learning chỉ dùng số liệu, unsupervised learning dùng văn bản.",
-            "D": "Supervised learning học từ dữ liệu mới, unsupervised learning học từ dữ liệu cũ."
+            "A": "Giảm thời gian xử lý",
+            "B": "Đảm bảo dữ liệu không bị mất",
+            "C": "Tăng cường bảo mật",
+            "D": "Tối ưu hóa chi phí"
           },
-          "topic": "d9925224-3203-43a8-9dd7-11599693fc79 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "f86e9504-dc7f-41dc-a247-05de3fd43071 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 2,
-          "question_id": "ae00e2b1-b0ca-4c01-9cbb-2c51471111e2",
-          "question": "Hệ thống gợi ý phim của Netflix là ví dụ về ứng dụng nào?",
+          "question_id": "f7008e13-7cfe-4bd0-9bd0-6bab668173ee",
+          "question": "Đặc điểm nào sau đây không phải của HDFS?",
           "options": {
-            "A": "Recommendation system",
-            "B": "Clustering",
-            "C": "Classification",
-            "D": "Regression"
+            "A": "Khả năng mở rộng",
+            "B": "Chạy trên phần cứng giá rẻ",
+            "C": "Cung cấp độ trễ thấp",
+            "D": "Hỗ trợ lưu trữ dữ liệu lớn"
           },
-          "topic": "ae00e2b1-b0ca-4c01-9cbb-2c51471111e2 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "f7008e13-7cfe-4bd0-9bd0-6bab668173ee + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 3,
-          "question_id": "052b108b-9165-494f-b6be-1212b34fe811",
-          "question": "Điều nào sau đây là đúng về L2-norm của một vector?",
+          "question_id": "acbd3c7f-9536-451b-b301-01eb311b6fdb",
+          "question": "Chức năng chính của NameNode trong HDFS là gì?",
           "options": {
-            "A": "Là căn bậc hai tổng bình phương các phần tử.",
-            "B": "Là tổng các phần tử.",
-            "C": "Là giá trị lớn nhất của vector.",
-            "D": "Là số chiều của vector."
+            "A": "Lưu trữ dữ liệu người dùng",
+            "B": "Quản lý metadata",
+            "C": "Xử lý yêu cầu của người dùng",
+            "D": "Tạo bản sao dữ liệu"
           },
-          "topic": "052b108b-9165-494f-b6be-1212b34fe811 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "acbd3c7f-9536-451b-b301-01eb311b6fdb + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 4,
-          "question_id": "c9c6ef7f-c863-4231-8b97-d6f96a1308a7",
-          "question": "Bạn được giao dự đoán liệu sinh viên trẻ, thu nhập trung bình, tín nhiệm bình thường có được cấp tín dụng không. Đây là loại bài toán nào?",
+          "question_id": "b2e13f6d-9822-4366-9d53-5b897d3ef5d1",
+          "question": "Hadoop có thể xử lý loại dữ liệu nào?",
           "options": {
-            "A": "Classification",
-            "B": "Regression",
-            "C": "Clustering",
-            "D": "Dimension reduction"
+            "A": "Dữ liệu có cấu trúc",
+            "B": "Dữ liệu phi cấu trúc",
+            "C": "Cả A và B",
+            "D": "Không thể xử lý dữ liệu"
           },
-          "topic": "c9c6ef7f-c863-4231-8b97-d6f96a1308a7 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "b2e13f6d-9822-4366-9d53-5b897d3ef5d1 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 5,
-          "question_id": "0a99aaa4-158f-4a51-90fa-e228402c30b7",
-          "question": "Một vector hàng được ký hiệu bằng chữ gì?",
+          "question_id": "fff22e11-cf07-4170-912e-0efc28252b82",
+          "question": "Hadoop MapReduce sử dụng hệ thống tệp nào để lưu trữ dữ liệu?",
           "options": {
-            "A": "Chữ thường in đậm",
-            "B": "Chữ thường in nghiêng",
-            "C": "Chữ hoa in đậm",
-            "D": "Chữ hoa in nghiêng"
+            "A": "HDFS",
+            "B": "GFS",
+            "C": "NFS",
+            "D": "S3"
           },
-          "topic": "0a99aaa4-158f-4a51-90fa-e228402c30b7 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "fff22e11-cf07-4170-912e-0efc28252b82 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 6,
-          "question_id": "4d62f904-26fc-4c28-862d-76419db48288",
-          "question": "Phân tích lý do tại sao supervised learning là nhóm thuật toán phổ biến nhất hiện nay.",
+          "question_id": "2b69f7fd-e52d-4118-80a7-c570af6c1dd0",
+          "question": "Điều gì xảy ra khi một Datanode gặp sự cố?",
           "options": {
-            "A": "Do có nhiều dữ liệu gắn nhãn, dễ đánh giá kết quả.",
-            "B": "Không cần dữ liệu nhãn.",
-            "C": "Chỉ áp dụng cho dữ liệu hình ảnh.",
-            "D": "Không yêu cầu kiểm tra kết quả."
+            "A": "Dữ liệu sẽ bị mất hoàn toàn",
+            "B": "Datanode sẽ tự động phục hồi",
+            "C": "Người dùng phải khôi phục dữ liệu",
+            "D": "Chỉ có một phần dữ liệu bị ảnh hưởng"
           },
-          "topic": "4d62f904-26fc-4c28-862d-76419db48288 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "2b69f7fd-e52d-4118-80a7-c570af6c1dd0 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 7,
-          "question_id": "755a0771-1979-40f1-813e-ff5939dd8926",
-          "question": "Khi nào nên sử dụng thuật toán Clustering?",
+          "question_id": "2df3e513-7496-4563-a116-41d2ae5877fe",
+          "question": "Tại sao cần phải phân vùng dữ liệu trong hệ thống phân tán?",
           "options": {
-            "A": "Khi muốn phân nhóm dữ liệu không có nhãn.",
-            "B": "Khi cần dự đoán số lượng thực.",
-            "C": "Khi cần phân loại nhãn rõ ràng.",
-            "D": "Khi muốn tối ưu hóa phần thưởng."
+            "A": "Để tăng cường bảo mật",
+            "B": "Để xử lý dữ liệu lớn hiệu quả hơn",
+            "C": "Để giảm chi phí lưu trữ",
+            "D": "Để dễ dàng quản lý"
           },
-          "topic": "755a0771-1979-40f1-813e-ff5939dd8926 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "2df3e513-7496-4563-a116-41d2ae5877fe + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 8,
-          "question_id": "adb7e222-fb5a-4627-9f1e-970f304b7de3",
-          "question": "Một thuật toán reinforcement learning phù hợp với tình huống nào sau đây?",
+          "question_id": "eff37b8b-648e-41cd-83a1-b32172da1e87",
+          "question": "Hadoop có khả năng mở rộng theo chiều nào?",
           "options": {
-            "A": "Xe tự lái học điều khiển dựa trên phần thưởng nhận được.",
-            "B": "Phân loại email spam.",
-            "C": "Tính giá trị trung bình.",
-            "D": "Chia nhóm khách hàng."
+            "A": "Theo chiều dọc",
+            "B": "Theo chiều ngang",
+            "C": "Cả hai chiều",
+            "D": "Không thể mở rộng"
           },
-          "topic": "adb7e222-fb5a-4627-9f1e-970f304b7de3 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "eff37b8b-648e-41cd-83a1-b32172da1e87 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 9,
-          "question_id": "11ae3e63-0d87-4bf4-a92b-aa0963d0de28",
-          "question": "Với một tập dữ liệu gồm Area, Number of bedrooms và Price, bài toán nào sau đây là Regression?",
+          "question_id": "feb9e609-e3db-4857-ace0-88e3d68820a8",
+          "question": "Điều gì đặc trưng cho kiến trúc Master/Slave trong HDFS?",
           "options": {
-            "A": "Dự đoán giá nhà dựa vào diện tích và số phòng ngủ.",
-            "B": "Phân nhóm nhà thành rẻ, trung bình, đắt.",
-            "C": "Xác định nhà có gần hồ Hoàn Kiếm không.",
-            "D": "Phân loại nhà theo màu sơn."
+            "A": "Chỉ có một máy chủ chính",
+            "B": "Nhiều máy chủ phụ lưu trữ dữ liệu",
+            "C": "Máy chủ chính không lưu trữ dữ liệu",
+            "D": "Cả A và B"
           },
-          "topic": "11ae3e63-0d87-4bf4-a92b-aa0963d0de28 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "feb9e609-e3db-4857-ace0-88e3d68820a8 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 10,
-          "question_id": "8585de59-117e-444a-aa0c-45628a466673",
-          "question": "So sánh sự khác nhau giữa Regression và Classification trong Machine Learning.",
+          "question_id": "64224a6d-5e40-4ab0-a393-c68ef672638d",
+          "question": "Chunk trong HDFS có kích thước tiêu chuẩn là bao nhiêu?",
           "options": {
-            "A": "Regression dự đoán giá trị thực, Classification phân nhóm.",
-            "B": "Regression phân nhóm, Classification dự đoán số thực.",
-            "C": "Cả hai đều phân nhóm.",
-            "D": "Cả hai đều chỉ dự đoán số thực."
+            "A": "32MB",
+            "B": "64MB",
+            "C": "128MB",
+            "D": "256MB"
           },
-          "topic": "8585de59-117e-444a-aa0c-45628a466673 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "64224a6d-5e40-4ab0-a393-c68ef672638d + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 11,
-          "question_id": "b4013dd9-1069-4384-94c2-a9c2a0931a80",
-          "question": "Hãy phân tích ưu điểm của dimension reduction trong xử lý dữ liệu lớn.",
+          "question_id": "f54d788d-082b-4f24-8ed8-68d76525e57a",
+          "question": "Trong HDFS, ai là người chịu trách nhiệm quản lý việc sao lưu dữ liệu?",
           "options": {
-            "A": "Giảm số chiều giúp tăng tốc và giảm phức tạp mô hình.",
-            "B": "Tăng kích thước dữ liệu để phân loại tốt hơn.",
-            "C": "Tạo thêm nhãn cho dữ liệu.",
-            "D": "Giữ nguyên toàn bộ thông tin gốc."
+            "A": "NameNode",
+            "B": "DataNode",
+            "C": "TaskTracker",
+            "D": "JobTracker"
           },
-          "topic": "b4013dd9-1069-4384-94c2-a9c2a0931a80 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "f54d788d-082b-4f24-8ed8-68d76525e57a + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 12,
-          "question_id": "e34324dd-6eca-4b3f-965e-21fd37bb08d6",
-          "question": "Nếu dữ liệu gồm Food Item, Spiciness, Sweetness, bài toán nào sau đây là Classification?",
+          "question_id": "6e05af63-7cee-46f8-977c-b23db3b6b3d7",
+          "question": "Lợi ích chính của việc sử dụng hệ thống tệp phân tán là gì?",
           "options": {
-            "A": "Phân loại món ăn thành ngọt hoặc cay.",
-            "B": "Dự đoán điểm ngọt dựa vào tên món.",
-            "C": "Tính tổng số món ăn.",
-            "D": "Tính trung bình độ cay."
+            "A": "Tăng cường bảo mật",
+            "B": "Khả năng mở rộng và hiệu suất cao",
+            "C": "Giảm chi phí lưu trữ",
+            "D": "Dễ dàng truy cập dữ liệu"
           },
-          "topic": "e34324dd-6eca-4b3f-965e-21fd37bb08d6 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "6e05af63-7cee-46f8-977c-b23db3b6b3d7 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 13,
-          "question_id": "987c1ce3-ce60-4d46-9563-1d5def694c64",
-          "question": "Bạn có tập dữ liệu $(x_i, y_i) \\in X \\times Y$, mục tiêu của quá trình học máy là gì?",
+          "question_id": "96645ee5-9e20-40bf-9135-b9e376715930",
+          "question": "YARN trong Hadoop có vai trò gì?",
           "options": {
-            "A": "Tìm hàm $f$ sao cho $y_i \\approx f(x_i)$ với mọi $i$.",
-            "B": "Phân nhóm $x_i$ không cần nhãn.",
-            "C": "Tối đa hóa số chiều dữ liệu.",
-            "D": "Chỉ lưu trữ $x_i$ mà không quan tâm $y_i$."
+            "A": "Quản lý tài nguyên và lập lịch công việc",
+            "B": "Lưu trữ dữ liệu",
+            "C": "Thực hiện phân tích dữ liệu",
+            "D": "Cung cấp giao diện người dùng"
           },
-          "topic": "987c1ce3-ce60-4d46-9563-1d5def694c64 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "96645ee5-9e20-40bf-9135-b9e376715930 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 14,
-          "question_id": "9dab18b6-eee9-4365-8391-69121ddc1c8e",
-          "question": "Giả sử có tập dữ liệu Area, Bedrooms, Distance, Price, làm sao áp dụng supervised learning để dự đoán giá nhà mới?",
+          "question_id": "9af08840-7fac-4429-a198-2857d7bee130",
+          "question": "HDFS là gì và nó được thiết kế để làm gì?",
           "options": {
-            "A": "Huấn luyện mô hình trên dữ liệu có nhãn, dự đoán giá trị mới.",
-            "B": "Chia nhóm nhà theo diện tích.",
-            "C": "Tìm điểm bất thường trong dữ liệu.",
-            "D": "Giảm số chiều dữ liệu."
+            "A": "Hệ thống tệp phân tán cho dữ liệu lớn",
+            "B": "Cơ sở dữ liệu quan hệ",
+            "C": "Hệ thống tệp truyền thống",
+            "D": "Mạng xã hội"
           },
-          "topic": "9dab18b6-eee9-4365-8391-69121ddc1c8e + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "9af08840-7fac-4429-a198-2857d7bee130 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 15,
-          "question_id": "90b6486b-a254-47c8-8e0d-e7d533616264",
-          "question": "Khi chỉ có tập dữ liệu đầu vào X mà không có nhãn Y, thuật toán nào phù hợp?",
+          "question_id": "b1bac32b-5bb8-4a5f-a819-20f33238206e",
+          "question": "MapReduce trong Hadoop giúp làm gì?",
           "options": {
-            "A": "Unsupervised learning",
-            "B": "Supervised learning",
-            "C": "Reinforcement learning",
-            "D": "Regression"
+            "A": "Chạy các tác vụ tuần tự",
+            "B": "Xử lý dữ liệu song song",
+            "C": "Lưu trữ dữ liệu",
+            "D": "Tạo ra bản sao dữ liệu"
           },
-          "topic": "90b6486b-a254-47c8-8e0d-e7d533616264 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "b1bac32b-5bb8-4a5f-a819-20f33238206e + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 16,
-          "question_id": "b5bf2fb9-7eb0-4cb6-a985-25a3db037931",
-          "question": "Một ma trận được ký hiệu như thế nào trong ký hiệu toán học?",
+          "question_id": "abbc93a0-92c1-42e6-9270-c482bb882b92",
+          "question": "Quá trình nào sau đây không phải là một phần của MapReduce?",
           "options": {
-            "A": "Chữ hoa in đậm",
-            "B": "Chữ thường in đậm",
-            "C": "Chữ hoa in nghiêng",
-            "D": "Chữ thường in nghiêng"
+            "A": "Map",
+            "B": "Reduce",
+            "C": "Join",
+            "D": "Shuffle"
           },
-          "topic": "b5bf2fb9-7eb0-4cb6-a985-25a3db037931 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "topic": "abbc93a0-92c1-42e6-9270-c482bb882b92 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         }
       ],
       "fill_in_blank": [
         {
           "id": 17,
-          "question_id": "c747e2b4-d647-4416-a2a9-c8dc66a3f275",
-          "question": "Bài toán được gọi là bài toán phân loại khi các nhãn của dữ liệu đầu vào được chia thành một số lượng _____ các nhóm.",
-          "topic": "c747e2b4-d647-4416-a2a9-c8dc66a3f275 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "question_id": "39ea671a-876a-4cb6-a5a5-260533496b3e",
+          "question": "Trong hệ thống Hadoop, dữ liệu được xử lý _____ trên cụm.",
+          "topic": "39ea671a-876a-4cb6-a5a5-260533496b3e + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         },
         {
           "id": 18,
-          "question_id": "d9f878fe-7cc7-4572-9f7f-c9907892ef47",
-          "question": "Phương pháp học máy dự đoán kết quả đầu ra của dữ liệu mới dựa trên các cặp dữ liệu và nhãn đã biết được gọi là _____.",
-          "topic": "d9f878fe-7cc7-4572-9f7f-c9907892ef47 + d6643a9b-9b40-4256-a05c-06f029d5c83a",
+          "question_id": "f2d832ad-242f-47c4-bad3-8fc684a979a1",
+          "question": "MapReduce cung cấp hai hàm chính là Map và _____ để điều khiển luồng dữ liệu.",
+          "topic": "f2d832ad-242f-47c4-bad3-8fc684a979a1 + 11609907-9100-48a8-a28f-757d34dde5f4",
           "max_points": 0.5
         }
       ],
       "essay": [
         {
           "id": 19,
-          "question_id": "fe5cd2dd-a1df-4174-87d0-ebeac4cf58dc",
-          "question": "Trong nhận dạng chữ viết tay, hãy đề xuất một quy trình sử dụng phương pháp clustering để phân nhóm các ký tự chưa được gán nhãn. Phân tích lợi ích và hạn chế của phương pháp này trong bài toán nhận dạng chữ viết tay.",
+          "question_id": "98084d3e-87d9-4c9a-8667-8e9d1782989b",
+          "question": "Giải thích vai trò của YARN trong việc quản lý tài nguyên của cụm Hadoop và so sánh với các phương pháp quản lý tài nguyên khác.",
           "max_points": 0.5,
-          "topic": "fe5cd2dd-a1df-4174-87d0-ebeac4cf58dc + d6643a9b-9b40-4256-a05c-06f029d5c83a"
+          "topic": "98084d3e-87d9-4c9a-8667-8e9d1782989b + 11609907-9100-48a8-a28f-757d34dde5f4"
         },
         {
           "id": 20,
-          "question_id": "41399006-febb-40f4-a1bc-ae54f2c565eb",
-          "question": "Phân tích sự khác biệt giữa phương pháp Semi-supervised learning và các phương pháp học máy khác dựa trên cách tiếp cận học tập. Đưa ra ví dụ minh họa về tình huống thực tế có thể áp dụng Semi-supervised learning.",
+          "question_id": "d2a97efa-e6c5-464b-9bb2-2ab4c385fe69",
+          "question": "Mô tả quy trình xử lý dữ liệu trong MapReduce và phân tích các bước chính của quy trình này.",
           "max_points": 0.5,
-          "topic": "41399006-febb-40f4-a1bc-ae54f2c565eb + d6643a9b-9b40-4256-a05c-06f029d5c83a"
+          "topic": "d2a97efa-e6c5-464b-9bb2-2ab4c385fe69 + 11609907-9100-48a8-a28f-757d34dde5f4"
         }
       ],
       "true_false": []
