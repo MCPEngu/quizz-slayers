@@ -1,6 +1,9 @@
 import json
 import os
 import re
+import tkinter as tk
+import tkinter.font as tkfont
+from tkinter import messagebox
 from typing import Optional
 
 import pyperclip
@@ -212,6 +215,64 @@ def build_compact_prompt_payload(payload_json: dict) -> dict:
     return compact
 
 
+def prompt_answers_via_gui() -> dict[int, str]:
+    root = tk.Tk()
+    root.title("Paste Answers")
+    root.geometry("820x620")
+    root.minsize(720, 520)
+
+    ui_font = tkfont.Font(family="Segoe UI", size=10)
+
+    instruction = (
+        "Paste one-line JSONL or one-line JSON array below, then click Validate."
+    )
+    label = tk.Label(root, text=instruction, anchor="w", justify="left", font=ui_font)
+    label.pack(fill="x", padx=12, pady=(12, 4))
+
+    text = tk.Text(root, wrap="word", font=ui_font)
+    text.pack(fill="both", expand=True, padx=12, pady=8)
+
+    result: dict[int, str] = {}
+
+    def on_validate() -> None:
+        raw = text.get("1.0", "end").strip()
+        if not raw:
+            messagebox.showwarning("Invalid", "Input is empty.")
+            return
+        answers = load_answers_from_jsonl_line(raw)
+        if not answers:
+            messagebox.showerror("Invalid", "Could not parse valid answers.")
+            return
+        result.update(answers)
+        root.destroy()
+
+    def on_paste() -> None:
+        try:
+            clip = root.clipboard_get()
+        except Exception:
+            messagebox.showerror("Clipboard", "Clipboard is empty or unavailable.")
+            return
+        text.delete("1.0", "end")
+        text.insert("1.0", clip)
+
+    buttons = tk.Frame(root)
+    buttons.pack(fill="x", pady=(0, 12))
+
+    paste_button = tk.Button(buttons, text="Paste from Clipboard", command=on_paste, font=ui_font)
+    paste_button.pack(side="left", padx=6)
+
+    validate_button = tk.Button(buttons, text="Validate", command=on_validate, font=ui_font)
+    validate_button.pack(side="left", padx=6)
+
+    root.update_idletasks()
+    req_w = max(root.winfo_reqwidth() + 40, 820)
+    req_h = max(root.winfo_reqheight() + 80, 620)
+    root.geometry(f"{req_w}x{req_h}")
+
+    root.mainloop()
+    return result
+
+
 
 def test_bruteforce(page: Page) -> None:
     ensure_prompt_file()
@@ -257,12 +318,11 @@ def test_bruteforce(page: Page) -> None:
         print(f"[WARN] Clipboard copy failed: {exc}")
 
     print("[INFO] Wrote questions prompt to questions_prompt.txt.")
-    print("[INFO] Paste the prompt into AI, then paste JSONL (one line) here and press Enter.\n")
-    raw_answers_line = input()
+    print("[INFO] Paste the prompt into AI, then paste answers into the dialog.")
 
-    answers = load_answers_from_jsonl_line(raw_answers_line)
+    answers = prompt_answers_via_gui()
     if not answers:
-        print("[WARN] No answers parsed from JSONL input. Stopping.")
+        print("[WARN] No answers parsed from dialog input. Stopping.")
         return
 
     dialog = page.locator("div[role='dialog'][data-slot='dialog-content']")
