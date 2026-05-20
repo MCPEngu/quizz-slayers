@@ -166,6 +166,57 @@ def parse_true_false_answers(answer_value: str, expected_count: int) -> list[boo
     return result
 
 
+def build_compact_prompt_payload(payload_json: dict) -> dict:
+    data = payload_json.get("data", {}) if isinstance(payload_json, dict) else {}
+    exam_data = data.get("exam_data", {}) if isinstance(data, dict) else {}
+
+    compact: dict[str, object] = {
+        "title": data.get("title"),
+        "total_questions": data.get("total_questions"),
+        "multiple_choice": [],
+        "fill_in_blank": [],
+        "essay": [],
+        "true_false": [],
+    }
+
+    for item in exam_data.get("multiple_choice", []) or []:
+        compact["multiple_choice"].append(
+            {
+                "id": item.get("id"),
+                "question": item.get("question"),
+                "options": item.get("options"),
+            }
+        )
+
+    for item in exam_data.get("fill_in_blank", []) or []:
+        compact["fill_in_blank"].append(
+            {
+                "id": item.get("id"),
+                "question": item.get("question"),
+            }
+        )
+
+    for item in exam_data.get("essay", []) or []:
+        compact["essay"].append(
+            {
+                "id": item.get("id"),
+                "question": item.get("question"),
+            }
+        )
+
+    for item in exam_data.get("true_false", []) or []:
+        statements = [s.get("text") for s in item.get("statements", []) or []]
+        compact["true_false"].append(
+            {
+                "id": item.get("id"),
+                "question": item.get("question"),
+                "statements": statements,
+            }
+        )
+
+    return compact
+
+
 
 def test_bruteforce(page: Page) -> None:
     ensure_answer_files()
@@ -188,13 +239,14 @@ def test_bruteforce(page: Page) -> None:
     payload_text = ""
     try:
         payload_json = response.json()
-        payload_text = json.dumps(payload_json, ensure_ascii=False, indent=2)
+        compact_payload = build_compact_prompt_payload(payload_json)
+        payload_text = json.dumps(compact_payload, ensure_ascii=False, indent=2)
     except Exception:
         payload_text = response.text()
 
     prompt_line = (
-        "trả về JSON, mỗi phần tử gồm so_cau và dap_an; "
-        "dap_an là A/B/C/D hoặc từ/cụm từ/văn bản cần điền; "
+        "trả về JSON chuẩn, mỗi phần tử gồm so_cau và dap_an; "
+        "dap_an đáp án chính xác cho câu hỏi của so_cau tương ứng, một chuỗi là A/B/C/D hoặc từ/cụm từ/văn bản cần điền; "
         "với câu đúng/sai, dap_an là mảng giá trị Đúng/Sai theo thứ tự mệnh đề; "
         "không giải thích gì thêm"
     )
