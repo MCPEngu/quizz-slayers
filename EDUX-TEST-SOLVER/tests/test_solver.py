@@ -50,6 +50,16 @@ def ensure_login_env() -> tuple[str, str]:
     return email, password
 
 
+def ensure_answer_files() -> None:
+    os.makedirs(os.path.dirname(ANSWERS_PATH), exist_ok=True)
+    if not os.path.exists(ANSWERS_PATH):
+        with open(ANSWERS_PATH, "w", encoding="utf-8") as handle:
+            handle.write("")
+    if not os.path.exists(PROMPT_PATH):
+        with open(PROMPT_PATH, "w", encoding="utf-8") as handle:
+            handle.write("")
+
+
 def load_answers() -> dict[int, str]:
     with open(ANSWERS_PATH, "r", encoding="utf-8") as handle:
         content = handle.read().strip()
@@ -158,6 +168,7 @@ def parse_true_false_answers(answer_value: str, expected_count: int) -> list[boo
 
 
 def test_bruteforce(page: Page) -> None:
+    ensure_answer_files()
     email, password = ensure_login_env()
 
     page.goto(LOGIN_URL, wait_until="domcontentloaded")
