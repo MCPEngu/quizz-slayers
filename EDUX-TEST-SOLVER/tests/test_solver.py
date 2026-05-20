@@ -9,7 +9,6 @@ from playwright.sync_api import Page
 
 LOGIN_URL = "https://edux.cmcu.edu.vn/login"
 ENV_PATH = os.path.join(os.path.dirname(__file__), "..", ".env")
-ANSWERS_PATH = os.path.join(os.path.dirname(__file__), "..", "answers.txt")
 PROMPT_PATH = os.path.join(os.path.dirname(__file__), "..", "questions_prompt.txt")
 
 QUESTION_LABEL_RE = re.compile(r"^Câu\s+(\d+)")
@@ -50,75 +49,71 @@ def ensure_login_env() -> tuple[str, str]:
     return email, password
 
 
-def ensure_answer_files() -> None:
-    os.makedirs(os.path.dirname(ANSWERS_PATH), exist_ok=True)
-    if not os.path.exists(ANSWERS_PATH):
-        with open(ANSWERS_PATH, "w", encoding="utf-8") as handle:
-            handle.write("")
+def ensure_prompt_file() -> None:
+    os.makedirs(os.path.dirname(PROMPT_PATH), exist_ok=True)
     if not os.path.exists(PROMPT_PATH):
         with open(PROMPT_PATH, "w", encoding="utf-8") as handle:
             handle.write("")
 
 
-def load_answers() -> dict[int, str]:
-    with open(ANSWERS_PATH, "r", encoding="utf-8") as handle:
-        content = handle.read().strip()
+def load_answers_from_jsonl_line(raw_line: str) -> dict[int, str]:
+    line = raw_line.strip()
+    if line.startswith("\ufeff"):
+        line = line.lstrip("\ufeff").lstrip()
 
-    if content.startswith("\ufeff"):
-        content = content.lstrip("\ufeff").lstrip()
-
-    if content.startswith("{") or content.startswith("["):
+    if line.startswith("[") or line.startswith("{"):
         try:
-            data = json.loads(content)
+            data = json.loads(line)
         except Exception:
-            print("[WARN] answers.txt JSON parse failed. Falling back to line parser.")
             data = None
+        if data is not None:
+            if isinstance(data, dict) and "answers" in data:
+                data = data["answers"]
+            return normalize_answers_payload(data)
 
-        if isinstance(data, dict) and "answers" in data:
-            data = data["answers"]
+    # Try to split concatenated JSON objects: }{ -> }\n{
+    normalized = re.sub(r"}\s*{", "}\n{", line)
+    items = []
+    for chunk in normalized.splitlines():
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        try:
+            items.append(json.loads(chunk))
+        except Exception:
+            continue
 
-        answers: dict[int, str] = {}
-        if isinstance(data, list):
-            for item in data:
-                if not isinstance(item, dict):
-                    continue
-                idx = item.get("so_cau") or item.get("soCau") or item.get("question")
-                ans = item.get("dap_an") or item.get("dapAn") or item.get("answer")
-                if idx is None or ans is None:
-                    continue
-                try:
-                    idx_int = int(idx)
-                except Exception:
-                    continue
-                if isinstance(ans, list):
-                    answers[idx_int] = ", ".join(str(x) for x in ans)
-                else:
-                    answers[idx_int] = str(ans).strip()
-        elif isinstance(data, dict):
-            for key, value in data.items():
-                try:
-                    idx_int = int(key)
-                except Exception:
-                    continue
-                if isinstance(value, list):
-                    answers[idx_int] = ", ".join(str(x) for x in value)
-                else:
-                    answers[idx_int] = str(value).strip()
+    return normalize_answers_payload(items)
 
-        if answers:
-            return answers
 
+def normalize_answers_payload(data) -> dict[int, str]:
     answers: dict[int, str] = {}
-    for raw in content.splitlines():
-        line = raw.strip()
-        if not line:
-            continue
-        match = ANSWER_LINE_RE.match(line)
-        if not match:
-            continue
-        index = int(match.group(1))
-        answer = match.group(2).strip()
-        answers[index] = answer
+    if isinstance(data, list):
+        for item in data:
+            if not isinstance(item, dict):
+                continue
+            idx = item.get("so_cau") or item.get("soCau") or item.get("question")
+            ans = item.get("dap_an") or item.get("dapAn") or item.get("answer")
+            if idx is None or ans is None:
+                continue
+            try:
+                idx_int = int(idx)
+            except Exception:
+                continue
+            if isinstance(ans, list):
+                answers[idx_int] = ", ".join(str(x) for x in ans)
+            else:
+                answers[idx_int] = str(ans).strip()
+    elif isinstance(data, dict):
+        for key, value in data.items():
+            try:
+                idx_int = int(key)
+            except Exception:
+                continue
+            if isinstance(value, list):
+                answers[idx_int] = ", ".join(str(x) for x in value)
+            else:
+                answers[idx_int] = str(value).strip()
     return answers
 
 
@@ -219,7 +214,7 @@ def build_compact_prompt_payload(payload_json: dict) -> dict:
 
 
 def test_bruteforce(page: Page) -> None:
-    ensure_answer_files()
+    ensure_prompt_file()
     email, password = ensure_login_env()
 
     page.goto(LOGIN_URL, wait_until="domcontentloaded")
@@ -245,8 +240,9 @@ def test_bruteforce(page: Page) -> None:
         payload_text = response.text()
 
     prompt_line = (
-        "trả về JSON chuẩn, mỗi phần tử gồm so_cau và dap_an; "
-        "dap_an đáp án chính xác cho câu hỏi của so_cau tương ứng, một chuỗi là A/B/C/D hoặc từ/cụm từ/văn bản cần điền; "
+        "trả về JSONL một dòng duy nhất (không xuống dòng); "
+        "mỗi phần tử có so_cau và dap_an; "
+        "dap_an là A/B/C/D hoặc từ/cụm từ/văn bản cần điền; "
         "với câu đúng/sai, dap_an là mảng giá trị Đúng/Sai theo thứ tự mệnh đề; "
         "không giải thích gì thêm"
     )
@@ -261,10 +257,13 @@ def test_bruteforce(page: Page) -> None:
         print(f"[WARN] Clipboard copy failed: {exc}")
 
     print("[INFO] Wrote questions prompt to questions_prompt.txt.")
-    print("[INFO] Paste the prompt into AI, save answers into answers.txt, then press Enter to solve.\n")
-    input()
+    print("[INFO] Paste the prompt into AI, then paste JSONL (one line) here and press Enter.\n")
+    raw_answers_line = input()
 
-    answers = load_answers()
+    answers = load_answers_from_jsonl_line(raw_answers_line)
+    if not answers:
+        print("[WARN] No answers parsed from JSONL input. Stopping.")
+        return
 
     dialog = page.locator("div[role='dialog'][data-slot='dialog-content']")
     options_locator = dialog.locator(
