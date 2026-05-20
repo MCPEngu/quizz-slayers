@@ -407,4 +407,4 @@ def test_bruteforce(page: Page) -> None:
             page.wait_for_timeout(200)
 
     print("[INFO] Browser will stay open. Close the browser window to finish.")
-    page.wait_for_event("close")
+    page.wait_for_event("close", timeout=0)
